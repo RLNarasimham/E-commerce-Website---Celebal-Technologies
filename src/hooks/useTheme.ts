@@ -8,10 +8,12 @@ export const useTheme = () => {
   const isInitialThemeSet = useRef(false);
 
   useEffect(() => {
+    // Prevent re-execution of initialization logic
     if (isInitialThemeSet.current) {
       return;
     }
     
+    // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
@@ -21,10 +23,12 @@ export const useTheme = () => {
       dispatch(setTheme(initialTheme));
     }
     
+    // Mark initial theme as set
     isInitialThemeSet.current = true;
   }, [dispatch, theme]);
 
   useEffect(() => {
+    // Apply theme to document
     const root = document.documentElement;
     
     if (theme === 'dark') {
@@ -33,6 +37,7 @@ export const useTheme = () => {
       root.classList.remove('dark');
     }
     
+    // Save theme preference
     localStorage.setItem('theme', theme);
   }, [theme]);
 

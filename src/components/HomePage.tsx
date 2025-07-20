@@ -50,10 +50,8 @@ const HomePage: React.FC = () => {
   const handleLoginClick = () => {
     navigate("/login");
   };
-  const handleSignUpClick = () => {
-    navigate("/signup");
-  };
 
+  // Get featured products (highest rated)
   const featuredProducts =
     products
       ?.slice()
@@ -92,8 +90,7 @@ const HomePage: React.FC = () => {
             <div className="flex justify-center mt-6">
               <Link
                 to="/signup"
-                className="px-8 py-3 rounded-lg bg-transparent font-medium transition-colors
-      hover:bg-white text-white bg-blue-600 border-2 border-white hover:text-blue-600"
+                className="px-8 py-3 rounded-lg font-medium transition-colors border-2 border-white text-white hover:bg-white hover:text-blue-600"
               >
                 Create Account
               </Link>
@@ -264,7 +261,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Action Section */}
+      {/* Call to Action Section */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-700 dark:to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Start Shopping?</h2>
@@ -274,8 +271,8 @@ const HomePage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
-              onClick={handleSignUpClick}
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center space-x-2"
+              onClick={handleLoginClick}
+              className="bg-blue-600 text-white border-2 bg-transparent hover:text-blue-600 hover:bg-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2"
             >
               <User className="h-5 w-5" />
               <span>Create Account</span>
