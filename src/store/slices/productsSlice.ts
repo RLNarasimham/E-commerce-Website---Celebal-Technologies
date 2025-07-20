@@ -2,17 +2,14 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../index";
 import { createSelector } from "@reduxjs/toolkit";
 
-// Keywords that map to the "men's clothing" category
 const MEN_KEYWORDS = ["men", "male", "tshirt", "shirt", "jeans", "jacket"];
 
-// Define the product type
 export interface Product {
   id: number;
   name: string;
   category: string;
   image: string;
   price: number;
-  // Add other fields as needed
 }
 
 interface ProductsState {
@@ -21,18 +18,16 @@ interface ProductsState {
   error: string | null;
 }
 
-// Initial state
 const initialState: ProductsState = {
   all: [],
   loading: false,
   error: null,
 };
 
-// Async thunk to fetch products from your API
 export const fetchProducts = createAsyncThunk<Product[]>(
   "products/fetchAll",
   async () => {
-    const res = await fetch("https://fakestoreapi.com/products"); // Replace with your own API
+    const res = await fetch("https://fakestoreapi.com/products");
     if (!res.ok) throw new Error("Failed to fetch products");
     return await res.json();
   }
@@ -62,7 +57,6 @@ const productsSlice = createSlice({
   },
 });
 
-// Selector to get filtered products by search query
 export const selectFilteredProducts = createSelector(
   [
     (state: RootState) => state.products.all,
@@ -80,7 +74,6 @@ export const selectFilteredProducts = createSelector(
       const nameMatch = title.includes(q);
       const exactCategoryMatch = category.includes(q);
 
-      // Strict manual category mapping
       const menAliasMatch =
         MEN_KEYWORDS.some((keyword) => q.includes(keyword)) &&
         category === "men's clothing";

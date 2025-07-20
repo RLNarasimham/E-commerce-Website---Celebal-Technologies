@@ -18,12 +18,12 @@ import { fetchProducts } from "./store/slices/productsSlice";
 import { useAppDispatch } from "./store";
 import Orders from "./components/ReturnsOrders";
 import SignUp from "./components/SignUp";
-import Login from "./components/LoginPage"; // Adjust path if in a different folder
+import Login from "./components/LoginPage";
 
 const queryClient = new QueryClient();
 
 function AppContent() {
-  useTheme(); // Initialize theme
+  useTheme(); 
 
   const dispatch = useAppDispatch();
 
@@ -31,121 +31,76 @@ function AppContent() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // return (
-  //   <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-  //     <Header />
-  //     <Cart />
-  //     <Routes>
-  //       <Route path="/" element={<HomePage />} />
-  //       <Route
-  //         path="/products"
-  //         element={
-  //           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  //             <div className="flex flex-col lg:flex-row gap-8">
-  //               <aside className="w-full lg:w-64 flex-shrink-0">
-  //                 <ProductFilter />
-  //               </aside>
-  //               <div className="flex-1">
-  //                 <ProductList />
-  //               </div>
-  //             </div>
-  //           </main>
-  //         }
-  //       />
-  //       <Route
-  //         path="/category/:categoryName"
-  //         element={
-  //           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  //             <div className="flex flex-col lg:flex-row gap-8">
-  //               <aside className="w-full lg:w-64 flex-shrink-0">
-  //                 <ProductFilter />
-  //               </aside>
-  //               <div className="flex-1">
-  //                 <ProductList />
-  //               </div>
-  //             </div>
-  //           </main>
-  //         }
-  //       />
-  //       <Route path="/about" element={<AboutUs />} />
-  //       <Route path="/contact" element={<ContactUs />} />
-  //       <Route path="/faq" element={<FAQs />} />
-  //     </Routes>
-  //     <Footer />
-  //   </div>
-  // );
-
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div className="flex flex-col min-h-screen justify-between bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <Header />
       <Cart />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-
-        <Route
-          path="/products"
-          element={
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <div className="flex flex-col lg:flex-row gap-8">
-                <aside className="w-full lg:w-64 flex-shrink-0">
-                  <ProductFilter />
-                </aside>
-                <div className="flex-1">
-                  <ProductList />
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/products"
+            element={
+              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="flex flex-col lg:flex-row gap-8">
+                  <aside className="w-full lg:w-64 flex-shrink-0">
+                    <ProductFilter />
+                  </aside>
+                  <div className="flex-1">
+                    <ProductList />
+                  </div>
                 </div>
-              </div>
-            </main>
-          }
-        />
+              </main>
+            }
+          />
 
-        <Route
-          path="/category/:categoryName"
-          element={
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <div className="flex flex-col lg:flex-row gap-8">
-                <aside className="w-full lg:w-64 flex-shrink-0">
-                  <ProductFilter />
-                </aside>
-                <div className="flex-1">
-                  <ProductList />
+          <Route
+            path="/category/:categoryName"
+            element={
+              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="flex flex-col lg:flex-row gap-8">
+                  <aside className="w-full lg:w-64 flex-shrink-0">
+                    <ProductFilter />
+                  </aside>
+                  <div className="flex-1">
+                    <ProductList />
+                  </div>
                 </div>
-              </div>
-            </main>
-          }
-        />
+              </main>
+            }
+          />
 
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/faq" element={<FAQs />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQs />} />
+          <Route
+            path="/orders"
+            element={
+              <main className="max-w-3xl mx-auto px-4 py-8 w-full">
+                <Orders />
+              </main>
+            }
+          />
 
-        {/* ✅ Step 2: Add the orders route */}
-        <Route
-          path="/orders"
-          element={
-            <main className="max-w-3xl mx-auto px-4 py-8 w-full">
-              <Orders />
-            </main>
-          }
-        />
+          <Route
+            path="/login"
+            element={
+              <main className="w-full">
+                <Login />
+              </main>
+            }
+          />
 
-        <Route
-          path="/login"
-          element={
-            <main className="w-full">
-              <Login />
-            </main>
-          }
-        />
-
-        <Route
-          path="/signup"
-          element={
-            <main className="w-full">
-              <SignUp />
-            </main>
-          }
-        />
-      </Routes>
+          <Route
+            path="/signup"
+            element={
+              <main className="w-full">
+                <SignUp />
+              </main>
+            }
+          />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );
